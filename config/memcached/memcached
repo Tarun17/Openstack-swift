@@ -1,0 +1,9 @@
+PORT="11211"
+USER="memcached"
+MAXCONN="1024"
+CACHESIZE="64"
+OPTIONS="-l 127.0.0.1,18.216.209.96"
+
+Memcached_servers = local:11211
+#Memcached_servers = local1:11211,local2:11211,local3:11211
+

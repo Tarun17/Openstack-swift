@@ -1,0 +1,2 @@
+FROM mariadb
+ADD config/mariadb/openstack.cnf /etc/mysql/conf.d/openstack.cnf

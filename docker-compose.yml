@@ -1,0 +1,64 @@
+version: '3'
+
+services:
+
+  rabbitmq:
+   build:
+     dockerfile: Dockerfile.rabbitmq
+     context: .
+   image: rabbitmq-keystone
+   hostname: rabbitmq-server
+   container_name: rabbitmq-keystone
+   restart: always
+
+  mariadb:
+   image: mariadb
+   container_name: mariadb-keystone
+   ports:
+    - "3306"
+   volumes:
+    - /objectstore/config/mariadb/:/etc/mysql/conf.d
+   environment:
+    - MYSQL_ROOT_PASSWORD=Gramlabs123
+    - MYSQL_DATABASE=keystone
+    - MYSQL_USER=keystone
+    - MYSQL_PASSWORD=Gramlabs123
+   restart: always
+
+  memcached:
+   image: memcached
+   container_name: memcache
+   environment:
+     MEMCACHED_CACHE_SIZE: 64
+   restart: always
+
+  openstack-swift:
+   build:
+     dockerfile: Dockerfile.openstack-swift
+     context: .
+   image: openstack-swift
+   container_name: openstack-swift
+   privileged: true
+   volumes:
+     - /srv:/srv:shared
+   links:
+     - rabbitmq
+     - mariadb
+     - memcached
+   depends_on:
+     - rabbitmq
+     - mariadb
+     - memcached
+#   restart: always
+
+  haproxy:
+   build:
+     dockerfile: Dockerfile.haproxy-openstack
+     context: .
+   image: haproxy-swift
+   container_name: haproxy-swift
+   links:
+     - openstack-swift
+   ports: 
+     - 8080:8080
+   restart: always

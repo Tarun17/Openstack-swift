@@ -1,0 +1,61 @@
+FROM centos
+# RUN systemctl disable firewalld
+# RUN yum install -y https://rdoproject.org/repos/rdo-release.rpm
+# RUN openssl rand -hex 10
+RUN yum install -y \
+    https://rdoproject.org/repos/rdo-release.rpm \
+    centos-release-openstack-ocata
+RUN yum install -y \
+    python-openstackclient \
+    openstack-selinux  \
+    python2-PyMySQL \
+    openstack-keystone \
+    mod_wsgi \ 
+    openstack-dashboard \
+    targetcli \
+    python-keystone \
+    openstack-swift-proxy \
+    python-swiftclient \
+    python-keystoneclient \ 
+    python-keystonemiddleware \
+    xfsprogs \
+    git
+RUN yum upgrade -y
+# RUN yum install -y pip
+# RUN pip install 
+
+# RUN openssl rand -hex 10
+RUN yum install -y \
+    curl \
+    gcc \
+    memcached \
+    rsync \ 
+    sqlite \
+    xfsprogs \
+    git-core
+RUN yum install -y \
+    libffi-devel \
+    xinetd \
+    liberasurecode-devel
+RUN yum install -y \
+    openssl-devel \ 
+    python-setuptools
+RUN yum install -y \
+    python-coverage \
+    python-devel \
+    python-nose
+RUN yum install -y \
+    pyxattr \
+    python-eventlet
+RUN yum install -y \
+    python-greenlet \
+    python-paste-deploy
+RUN yum install -y \
+    python-netifaces \
+    python-pip python-dns
+RUN yum install -y \
+    python-mock
+
+ADD config/openstack-base/selinux /etc/selinux/config
+ADD config/openstack-base/openstack.cnf /etc/my.cnf.d/openstack.cnf
+

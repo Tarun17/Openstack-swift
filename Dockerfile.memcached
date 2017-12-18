@@ -1,0 +1,5 @@
+FROM centos
+RUN yum install -y memcached
+ADD config/memcached/memcached /etc/sysconfig/memcached
+RUN systemctl enable memcached
+RUN systemctl restart memcached
