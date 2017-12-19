@@ -1,5 +1,5 @@
 import boto3, botocore
-STORAGE_ENDPOINT = 'http://172.31.5.77:8080'
+STORAGE_ENDPOINT = 'http://0.0.0.0:8080'
 STORAGE_ACCESSKEY = 'testuser2'
 STORAGE_SECRETKEY = 'Passw0rd'
 from botocore.client import Config
