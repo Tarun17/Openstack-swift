@@ -19,10 +19,10 @@ services:
    volumes:
     - /objectstore/config/mariadb/:/etc/mysql/conf.d
    environment:
-    - MYSQL_ROOT_PASSWORD=Gramlabs123
+    - MYSQL_ROOT_PASSWORD=Password123
     - MYSQL_DATABASE=keystone
     - MYSQL_USER=keystone
-    - MYSQL_PASSWORD=Gramlabs123
+    - MYSQL_PASSWORD=Password123
    restart: always
 
   memcached:
