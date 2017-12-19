@@ -31,7 +31,6 @@ RUN yum install -y \
     memcached \
     rsync \ 
     sqlite \
-    xfsprogs \
     git-core
 RUN yum install -y \
     libffi-devel \
