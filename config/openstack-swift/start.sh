@@ -82,3 +82,5 @@ echo -e "\nCreate credentials for the user testuser2" ; openstack credential cre
 #run_command "Create credentials for the user testuser2" openstack credential create --type ec2 --project s3test testuser2 \'\{\"access\":\"testuser2\",\"secret\":\"Passw0rd\"\}\'
 run_command "Add the user role to the testuser1 user" openstack role add --project s3test --user testuser1 user
 run_command "Add the user role to the testuser2 user" openstack role add --project s3test --user testuser2 user
+
+bash
