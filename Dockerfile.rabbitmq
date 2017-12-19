@@ -1,11 +1,11 @@
 FROM rabbitmq
 # RUN systemctl enable rabbitmq-server
 # RUN systemctl restart rabbitmq-server
-# RUN rabbitmqctl add_user openstack Gramlabs123 2>/dev/null
+# RUN rabbitmqctl add_user openstack Password123 2>/dev/null
 # RUN rabbitmqctl set_permissions openstack ".*" ".*" ".*"
 # Define environment variables.
 ENV RABBITMQ_USER openstack
-ENV RABBITMQ_PASSWORD Gramlabs123
+ENV RABBITMQ_PASSWORD Password123
 
 ADD config/rabbitmq/init.sh /tmp/init.sh
 EXPOSE 15672

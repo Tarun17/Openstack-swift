@@ -28,7 +28,7 @@ echo -e "\nPopulate the Identity service database" ; /bin/sh -c "keystone-manage
 #run_command "Populate the Identity service database" /bin/sh -c \"/usr/bin/keystone-manage db_sync\" keystone
 run_command "Initialize Fernet key repositories" keystone-manage fernet_setup --keystone-user keystone --keystone-group keystone
 run_command "Initialize Fernet key repositories" keystone-manage credential_setup --keystone-user keystone --keystone-group keystone
-run_command "Bootstrap the Identity service" keystone-manage bootstrap --bootstrap-password Gramlabs123 --bootstrap-admin-url http://localhost:35357/v3/ --bootstrap-internal-url http://localhost:5000/v3/ --bootstrap-public-url http://localhost:5000/v3/ --bootstrap-region-id RegionOne
+run_command "Bootstrap the Identity service" keystone-manage bootstrap --bootstrap-password Password123 --bootstrap-admin-url http://localhost:35357/v3/ --bootstrap-internal-url http://localhost:5000/v3/ --bootstrap-public-url http://localhost:5000/v3/ --bootstrap-region-id RegionOne
 run_command "Create a link to the /usr/share/keystone/wsgi-keystone.conf file" ln -sf /usr/share/keystone/wsgi-keystone.conf /etc/httpd/conf.d/wsgi-keystone.conf
 
 run_command "Create the service project" openstack project create --domain default --description ServiceProject service
@@ -36,8 +36,8 @@ run_command "Create the user role" openstack role create user
 run_command "Unset the temporary OS_AUTH_URL and OS_PASSWORD environment variable" unset OS_AUTH_URL OS_PASSWORD
 run_command "Setting up the Keystone environment variables" source /root/admin-openrc
 run_command "Request an authentication token" openstack token issue
-run_command "As the admin user, request an authentication token" openstack --os-password Gramlabs123 --os-auth-url http://localhost:35357/v3 --os-project-domain-name default --os-user-domain-name default --os-project-name admin --os-username admin token issue
-run_command "Create the service credentials for the user swift" openstack user create --domain default --password Gramlabs123 swift
+run_command "As the admin user, request an authentication token" openstack --os-password Password123 --os-auth-url http://localhost:35357/v3 --os-project-domain-name default --os-user-domain-name default --os-project-name admin --os-username admin token issue
+run_command "Create the service credentials for the user swift" openstack user create --domain default --password Password123 swift
 run_command "Add the admin role to the swift user and service project" openstack role add --project service --user swift admin
 run_command "Create the swift service entity" openstack service create --name swift --description OpenStackObjectStorage object-store
 run_command "Create the Object Store service API endpoints Public" openstack endpoint create --region RegionOne object-store public http://localhost:8080/v1/AUTH_\%\(tenant_id\)s
