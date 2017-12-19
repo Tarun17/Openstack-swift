@@ -49,6 +49,8 @@ services:
      - rabbitmq
      - mariadb
      - memcached
+   ports:
+     - 8022:22
 #   restart: always
 
   haproxy:

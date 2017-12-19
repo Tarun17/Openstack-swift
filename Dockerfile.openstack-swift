@@ -67,6 +67,7 @@ RUN echo 'root:Password123' | chpasswd && \
     ssh-keygen -q -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key && \
     sed -i "s/#UsePrivilegeSeparation.*/UsePrivilegeSeparation no/g" /etc/ssh/sshd_config && \
     sed -i "s/UsePAM.*/UsePAM no/g" /etc/ssh/sshd_config
+EXPOSE 8022
 
 # packets required for swift3.git
 RUN yum install -y libxml2-devel libxslt-devel
