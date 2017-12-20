@@ -51,6 +51,9 @@ services:
      - memcached
    ports:
      - "8022:22"
+     - 6200:6200
+     - 6201:6201
+     - 6202:6202
 #   restart: always
 
   haproxy:
