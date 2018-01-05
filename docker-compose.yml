@@ -54,7 +54,7 @@ services:
      - 6200:6200
      - 6201:6201
      - 6202:6202
-#   restart: always
+   restart: always
 
   haproxy:
    build:
