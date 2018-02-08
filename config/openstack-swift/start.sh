@@ -53,16 +53,31 @@ if [ ! -f $file ]; then
     run_command "Pre-configuration for Swift" chmod -R 775 /var/cache/swift
     run_command "Pre-configuration for Swift" mkdir -p /srv/node/objstore
     run_command "Pre-configuration for Swift" chown -R swift:swift /srv/node/objstore
+#################################    
+#    run_command "Change to Swift directory" cd /etc/swift
+#    run_command "Create the base account.builder file" swift-ring-builder account.builder create 10 1 1
+#    run_command "Create the base container.builder file" swift-ring-builder container.builder create 10 1 1
+#    run_command "Create the base object.builder file" swift-ring-builder object.builder create 10 1 1
     
+#    run_command "Add each storage node to the ring: Account" swift-ring-builder account.builder add --region 1 --zone 1 --ip localhost --port 6202 --device objstore --weight 1
+#    run_command "Add each storage node to the ring: Container" swift-ring-builder container.builder add --region 1 --zone 1 --ip localhost --port 6201 --device objstore --weight 1
+#    run_command "Add each storage node to the ring: Object" swift-ring-builder object.builder add --region 1 --zone 1 --ip localhost --port 6200 --device objstore --weight 1
+#################################
     run_command "Change to Swift directory" cd /etc/swift
-    run_command "Create the base account.builder file" swift-ring-builder account.builder create 10 1 1
-    run_command "Create the base container.builder file" swift-ring-builder container.builder create 10 1 1
-    run_command "Create the base object.builder file" swift-ring-builder object.builder create 10 1 1
-    
-    run_command "Add each storage node to the ring: Account" swift-ring-builder account.builder add --region 1 --zone 1 --ip localhost --port 6202 --device objstore --weight 1
-    run_command "Add each storage node to the ring: Container" swift-ring-builder container.builder add --region 1 --zone 1 --ip localhost --port 6201 --device objstore --weight 1
-    run_command "Add each storage node to the ring: Object" swift-ring-builder object.builder add --region 1 --zone 1 --ip localhost --port 6200 --device objstore --weight 1
-    
+    run_command "Create the base account.builder file" swift-ring-builder account.builder create 10 3 1
+    run_command "Create the base container.builder file" swift-ring-builder container.builder create 10 3 1
+    run_command "Create the base object.builder file" swift-ring-builder object.builder create 10 3 1
+
+    run_command "Add each storage node to the ring: Account" swift-ring-builder account.builder add --region 1 --zone 1 --ip 172.31.5.77 --port 6202 --device objstore --weight 1
+    run_command "Add each storage node to the ring: Container" swift-ring-builder container.builder add --region 1 --zone 1 --ip 172.31.5.77 --port 6201 --device objstore --weight 1
+    run_command "Add each storage node to the ring: Object" swift-ring-builder object.builder add --region 1 --zone 1 --ip 172.31.5.77 --port 6200 --device objstore --weight 1
+    run_command "Add each storage node to the ring: Account" swift-ring-builder account.builder add --region 1 --zone 1 --ip 172.31.6.69 --port 6202 --device objstore --weight 1
+    run_command "Add each storage node to the ring: Container" swift-ring-builder container.builder add --region 1 --zone 1 --ip 172.31.6.69 --port 6201 --device objstore --weight 1
+    run_command "Add each storage node to the ring: Object" swift-ring-builder object.builder add --region 1 --zone 1 --ip 172.31.6.69 --port 6200 --device objstore --weight 1
+    run_command "Add each storage node to the ring: Account" swift-ring-builder account.builder add --region 1 --zone 1 --ip 172.31.9.193 --port 6202 --device objstore --weight 1
+    run_command "Add each storage node to the ring: Container" swift-ring-builder container.builder add --region 1 --zone 1 --ip 172.31.9.193 --port 6201 --device objstore --weight 1
+    run_command "Add each storage node to the ring: Object" swift-ring-builder object.builder add --region 1 --zone 1 --ip 172.31.9.193 --port 6200 --device objstore --weight 1
+###################################    
     run_command "Verify the ring contents" swift-ring-builder account.builder
     run_command "Verify the ring contents" swift-ring-builder container.builder
     run_command "Verify the ring contents" swift-ring-builder object.builder
@@ -74,7 +89,7 @@ if [ ! -f $file ]; then
     run_command "Post-configuration for Swift" chown -R root:swift /etc/swift
     run_command "Post-configuration for Swift" chown -R root:root /etc/swift/account.builder /etc/swift/container.builder /etc/swift/object.builder
     run_command "Post-configuration for Swift" chown -R root:root /etc/swift/account.ring.gz /etc/swift/container.ring.gz /etc/swift/object.ring.gz
-    run_command "Starting Swift" swift-init main start
+    run_command "Starting Swift" swift-init all start
     
     run_command "Create the s3test project" openstack project create s3test
     run_command "Create the s3test credentials for the user testuser1" openstack user create --project s3test --password Passw0rd testuser1
@@ -90,8 +105,9 @@ if [ ! -f $file ]; then
 
 else
     run_command "Starting Apache server" /usr/sbin/httpd -k start
-    run_command "Starting Swift" swift-init main start  
+    run_command "Starting Swift" swift-init all start  
 
 fi
 
+/usr/bin/rsync --daemon
 /usr/sbin/sshd -D
