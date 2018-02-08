@@ -27,7 +27,7 @@ services:
 
   memcached:
    image: memcached
-   container_name: memcache
+   container_name: memcached
    environment:
      MEMCACHED_CACHE_SIZE: 64
    restart: always
