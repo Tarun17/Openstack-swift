@@ -78,6 +78,13 @@ RUN cd /root/swift; pip install -r requirements.txt; python setup.py develop;
 RUN git clone https://github.com/stackforge/swift3.git /root/swift3
 RUN cd /root/swift3; python setup.py develop;
 
+RUN yum install -y openstack-swift-account openstack-swift-container openstack-swift-object
+
+# configure logs for swift
+RUN yum -y install -y rsyslog
+ADD config/openstack-swift/rsyslog.conf /etc/rsyslog.conf
+ADD config/openstack-swift/listen.conf /etc/rsyslog.d/listen.conf
+
 # install debug tools
 RUN yum install -y \
     net-tools \
@@ -108,6 +115,10 @@ ADD config/openstack-swift/swift.conf /etc/swift/swift.conf
 
 # Add admin-openrc commands 
 ADD config/keystone/admin-openrc /root/admin-openrc
+
+# ADD rsync config file
+ADD config/openstack-swift/rsyncd.conf /etc/rsyncd.conf
+EXPOSE 873
 
 # configuration script for the keystone service
 ADD config/openstack-swift/start.sh /tmp/start.sh
