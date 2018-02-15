@@ -25,9 +25,9 @@ services:
     - MYSQL_PASSWORD=Password123
    restart: always
 
-  memcached:
+  memcache:
    image: memcached
-   container_name: memcached
+   container_name: memcache
    environment:
      MEMCACHED_CACHE_SIZE: 64
    restart: always
@@ -44,11 +44,11 @@ services:
    links:
      - rabbitmq
      - mariadb
-     - memcached
+     - memcache
    depends_on:
      - rabbitmq
      - mariadb
-     - memcached
+     - memcache
    ports:
      - "8022:22"
      - 6200:6200

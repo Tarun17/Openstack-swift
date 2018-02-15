@@ -120,7 +120,11 @@ ADD config/keystone/admin-openrc /root/admin-openrc
 ADD config/openstack-swift/rsyncd.conf /etc/rsyncd.conf
 EXPOSE 873
 
+# ADD script file for checking and restating the processes for Swift,rsync,httpd
+ADD config/openstack-swift/check_restart_porcesses.sh /tmp/check_restart_porcesses.sh
+
 # configuration script for the keystone service
 ADD config/openstack-swift/start.sh /tmp/start.sh
+
 # Define configuration for Keystone & Openstack
 ENTRYPOINT ["/tmp/start.sh"]
