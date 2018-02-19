@@ -58,6 +58,9 @@ RUN yum install -y \
 ADD config/openstack-swift/selinux /etc/selinux/config
 ADD config/openstack-swift/openstack.cnf /etc/my.cnf.d/openstack.cnf
 
+# ADD configuration file for Openstack-Dashboard Horizon
+ADD /config/openstack-swift/local_settings /etc/openstack-dashboard/local_settings
+
 # SSH installation and configuration
 RUN yum install -y openssh-server
 RUN echo 'root:Password123' | chpasswd && \
