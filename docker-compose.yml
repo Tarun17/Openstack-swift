@@ -55,6 +55,7 @@ services:
      - 6201:6201
      - 6202:6202
      - 873:873
+     - 80:80
    restart: always
 
   haproxy:
