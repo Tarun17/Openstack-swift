@@ -58,9 +58,6 @@ RUN yum install -y \
 ADD config/openstack-swift/selinux /etc/selinux/config
 ADD config/openstack-swift/openstack.cnf /etc/my.cnf.d/openstack.cnf
 
-# ADD configuration file for Openstack-Dashboard Horizon (needed port 80 to be opened)
-ADD /config/openstack-swift/local_settings /etc/openstack-dashboard/local_settings
-
 # SSH installation and configuration
 RUN yum install -y openssh-server
 RUN echo 'root:Password123' | chpasswd && \
@@ -103,7 +100,10 @@ RUN ln -sf /usr/share/keystone/wsgi-keystone.conf /etc/httpd/conf.d/wsgi-keyston
 # adding configuration files for keystone
 ADD config/keystone/keystone.conf /etc/keystone/keystone.conf
 ADD config/keystone/keystone-paste.ini /etc/keystone/keystone-paste.ini
+
+# adding configuration file for Openstack-Dashboard Horizon (needed port 80 to be opened)
 ADD config/keystone/local_settings /etc/openstack-dashboard/local_settings
+EXPOSE 80
 
 # adding configuration files for Swift
 #curl -o /etc/swift/account-server.conf https://git.openstack.org/cgit/openstack/swift/plain/etc/account-server.conf-sample?h=stable/ocata
