@@ -71,12 +71,12 @@ if [ ! -f $file ]; then
     run_command "Add each storage node to the ring: Account" swift-ring-builder account.builder add --region 1 --zone 1 --ip localhost --port 6202 --device objstore --weight 1
     run_command "Add each storage node to the ring: Container" swift-ring-builder container.builder add --region 1 --zone 1 --ip localhost --port 6201 --device objstore --weight 1
     run_command "Add each storage node to the ring: Object" swift-ring-builder object.builder add --region 1 --zone 1 --ip localhost --port 6200 --device objstore --weight 1
-    run_command "Add each storage node to the ring: Account" swift-ring-builder account.builder add --region 1 --zone 1 --ip 172.31.6.69 --port 6202 --device objstore --weight 1
-    run_command "Add each storage node to the ring: Container" swift-ring-builder container.builder add --region 1 --zone 1 --ip 172.31.6.69 --port 6201 --device objstore --weight 1
-    run_command "Add each storage node to the ring: Object" swift-ring-builder object.builder add --region 1 --zone 1 --ip 172.31.6.69 --port 6200 --device objstore --weight 1
-    run_command "Add each storage node to the ring: Account" swift-ring-builder account.builder add --region 1 --zone 1 --ip 172.31.9.193 --port 6202 --device objstore --weight 1
-    run_command "Add each storage node to the ring: Container" swift-ring-builder container.builder add --region 1 --zone 1 --ip 172.31.9.193 --port 6201 --device objstore --weight 1
-    run_command "Add each storage node to the ring: Object" swift-ring-builder object.builder add --region 1 --zone 1 --ip 172.31.9.193 --port 6200 --device objstore --weight 1
+    run_command "Add each storage node to the ring: Account" swift-ring-builder account.builder add --region 1 --zone 1 --ip 172.16.33.179 --port 6202 --device objstore --weight 1
+    run_command "Add each storage node to the ring: Container" swift-ring-builder container.builder add --region 1 --zone 1 --ip 172.16.33.179 --port 6201 --device objstore --weight 1
+    run_command "Add each storage node to the ring: Object" swift-ring-builder object.builder add --region 1 --zone 1 --ip 172.16.33.179 --port 6200 --device objstore --weight 1
+    run_command "Add each storage node to the ring: Account" swift-ring-builder account.builder add --region 1 --zone 1 --ip 172.16.33.180 --port 6202 --device objstore --weight 1
+    run_command "Add each storage node to the ring: Container" swift-ring-builder container.builder add --region 1 --zone 1 --ip 172.16.33.180 --port 6201 --device objstore --weight 1
+    run_command "Add each storage node to the ring: Object" swift-ring-builder object.builder add --region 1 --zone 1 --ip 172.16.33.180 --port 6200 --device objstore --weight 1
 ###################################     
     run_command "Verify the ring contents" swift-ring-builder account.builder
     run_command "Verify the ring contents" swift-ring-builder container.builder
