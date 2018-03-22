@@ -5,7 +5,7 @@ check_swift_process=( "container-updater" "account-auditor" "object-replicator" 
 check_rsync_process=( "rsync" )
 check_apache_process=( "httpd" )
 
-while sleep 40; do  # Endless loop;
+while sleep 35; do  # Endless loop;
 
 # check if swift processes are started and if not starting them;
    for p in "${check_swift_process[@]}"; do
